@@ -1,0 +1,34 @@
+Hero Unit -
+
+Properties:
+
+ * position
+ * level
+ * hp / mp
+ * energy
+ * recovery
+
+Data Objects:
+
+ * currentState:
+        * actions
+	* animation
+	* interuptable
+	* hitboxes
+	* hurtboxes
+ * buffs + debuffs:
+	* targetType (aoe, single target)
+	* aoe 
+	* actions
+	* removeable
+
+Item Slots:
+ * head
+ * amulet
+ * shoulder
+ * chest
+ * gloves
+ * pants
+ * boots
+ * bag (a small satchel <-> full war-bag)
+

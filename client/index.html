@@ -1,0 +1,63 @@
+<html>
+<head>
+	<style type="text/css">
+		@import "main.css";
+	</style>
+    <script type="text/javascript" src="vendor/lodash.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+
+<div id="wrapper">
+	<canvas id="main_canvas" width="650" height="500">
+	</canvas>
+</div>
+
+
+<script type="text/javascript">
+    J.run = (function() {
+        var loops = 0, skipTicks = 1000 / 60,
+                maxFrameSkip = 10,
+                nextGameTick = (new Date).getTime();
+        return function() {
+            loops = 0;
+            while ((new Date).getTime() > nextGameTick) {
+                J.update();
+                nextGameTick += skipTicks;
+            }
+            J.draw();
+        };
+    })();
+    (function() {
+        var onEachFrame;
+        if (window.webkitRequestAnimationFrame) {
+            onEachFrame = function(cb) {
+                var _cb = function() {
+                    cb();
+                    webkitRequestAnimationFrame(_cb);
+                }
+                _cb();
+            };
+        } else if (window.mozRequestAnimationFrame) {
+            onEachFrame = function(cb) {
+                var _cb = function() {
+                    cb();
+                    mozRequestAnimationFrame(_cb);
+                }
+                _cb();
+            };
+        } else {
+            onEachFrame = function(cb) {
+                setInterval(cb, 1000 / 60);
+            }
+        }
+        window.onEachFrame = onEachFrame;
+    })();
+
+    window.onload = function() {
+        J.init();
+        window.onEachFrame(J.run);
+    }
+</script>
+</body>
+</html>
