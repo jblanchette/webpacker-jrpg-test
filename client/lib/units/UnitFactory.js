@@ -3,16 +3,13 @@ var _ = require("lodash");
 
 module.exports = (function () {
 
-	var UnitCache = new JCache("UnitCache", 1000);
+	var UnitCache = new JCache("UnitCache");
 	var lastUnitID = 1;
 
 	var getUnitClass = function (type, options) {
 		var unitClass = require("./UnitClasses/" + type + ".js");
 
-		var unit = new unitClass(type, options);
-
-		console.log("Unit class: ", unit);
-		return unit;
+		return new unitClass(type, options);
 	};
 
 	var create = function (type, options) {
@@ -23,20 +20,22 @@ module.exports = (function () {
 			throw new Error("Error creating unit, couldn't add to cache.");
 		}
 		
-		return unitClass;
+		return unitClass.create(type, options);
 	};
 
 	var copy = function (id, options) {
-
-	};
-
-	var remove = function (id) {
-
+		var unit = UnitCache.get(id);
+		if (unit) {
+			return unit.create(unit.type, options);
+		} else {
+			console.warn("Tried to copy a unit that wasn't in the UnitCache");
+			return undefined;
+		}
 	};
 
 	return {
+		getUnitClass: getUnitClass,
 		create: create,
-		copy: copy,
-		remove: remove
+		copy: copy
 	};
 })();

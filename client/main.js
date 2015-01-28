@@ -27,10 +27,12 @@ var J = {
 			self.c.addEventListener(e, _.partial(self.mouseEvent, e), false);
 		});
 
-		var hero = UnitFactory.create("Hero");
+		var hero = UnitFactory.create("Hero", {x: 10, y: 10});
 
-		console.log("Hero: ", hero, _.functions(hero));
+		console.log("Hero: " + hero.x + "," + hero.y);
+
 		hero.walk(0,0);
+		console.log("After walk: " + hero.x + " , " + hero.y);
 	},
 
 	keyEvent: function (type, e) {
