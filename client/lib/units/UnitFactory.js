@@ -1,9 +1,9 @@
-var JCache = require("../data/Cache.js");
+var Cache = require("../data/Cache.js");
 var _ = require("lodash");
 
 module.exports = (function () {
 
-	var UnitCache = new JCache("UnitCache");
+	var UnitCache = new Cache("UnitCache");
 	var lastUnitID = 1;
 
 	var getUnitClass = function (type, options) {

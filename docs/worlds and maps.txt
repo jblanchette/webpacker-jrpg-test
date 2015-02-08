@@ -1,0 +1,40 @@
+Worlds
+
+The game thinks of a word as the outer wrapper which communicates like a controller would
+to the world components.
+
+The world consists of:
+	* A map
+	* An overworld
+	* Input Handlers
+	* Event Handlers
+
+Overworlds
+
+An overworld is a component on the world which represents the birds eye view of
+the map.  The player can interact with POI and travel or choose event targets for
+actions.
+
+There is also optionally display information about POI
+
+When viewing Overworlds, the player is presented with a list of Overworlds
+currently active with their units.  They're able to switch between
+worlds, overworlds, and maps using this view.
+
+Maps
+
+The map is the central component of the world, representing a container for
+the units, buildings, events, objects.  As well as handling unit input, events,
+and behavior.
+
+When a map is "active", it is either:
+ 	* The current focused view point of the player
+ 	* Triggered events or behaviors from the parent (current) active map
+
+Maps cannot be active without an event triggering them to do so.
+Triggered events of behvaiors cannot then trigger other events or behaviors.
+
+By only allowing certain things to happen as 'triggers', we can get dynamic
+simulated world behavior without risking players creating giant looping machines.
+
+
